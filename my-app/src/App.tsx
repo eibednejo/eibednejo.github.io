@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'; // Changed to HashRouter
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'; // Changed to HashRouter
 import LoginPage from './components/LoginPage';
 import SignupPage from './components/SignupPage';
 import AdminPage from './components/AdminPage';
@@ -7,16 +7,35 @@ import UserProfilePage from './components/UserProfilePage';
 import SubscriptionPage from './components/SubscriptionPage';
 import ChatPage from './components/ChatPage';
 
+// Simple auth check (replace with real logic as needed)
+const isAuthenticated = () => {
+    return !!localStorage.getItem('authToken');
+};
+
+// PrivateRoute component
+const PrivateRoute = ({ component: Component, ...rest }: any) => (
+    <Route
+        {...rest}
+        render={props =>
+            isAuthenticated() ? (
+                <Component {...props} />
+            ) : (
+                <Redirect to="/login" />
+            )
+        }
+    />
+);
+
 const App = () => {
     return (
         <Router>
             <Switch>
-                <Route path="/" exact component={ChatPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
-                <Route path="/admin" component={AdminPage} />
-                <Route path="/profile" component={UserProfilePage} />
-                <Route path="/subscriptions" component={SubscriptionPage} />
+                <PrivateRoute path="/" exact component={ChatPage} />
+                <PrivateRoute path="/admin" component={AdminPage} />
+                <PrivateRoute path="/profile" component={UserProfilePage} />
+                <PrivateRoute path="/subscriptions" component={SubscriptionPage} />
             </Switch>
         </Router>
     );
