@@ -47,7 +47,16 @@ const LoginPage = () => {
                     />
                 </div>
                 {error && <p className="fancy-message error">{error}</p>}
-                <button type="submit">Login</button>
+                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                    <button type="submit">Log In</button>
+                    <button
+                        type="button"
+                        onClick={() => history.push('/signup')}
+                        style={{ background: '#fff', color: '#f76b1c', border: '1.5px solid #f76b1c' }}
+                    >
+                        Sign Up
+                    </button>
+                </div>
             </form>
         </div>
     );
