@@ -17,6 +17,7 @@ const ChatPage = () => {
         { sender: 'assistant', text: 'Hello! How can I assist you today?' }
     ]);
     const [input, setInput] = useState('');
+    const [activeSidebar, setActiveSidebar] = useState('Chat');
 
     const handleCsvUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) return;
@@ -65,21 +66,29 @@ const ChatPage = () => {
                 alignItems: 'center',
                 minWidth: 180
             }}>
-                <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 32, color: '#2ecc71' }}>
+                <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 32, color: '#2ecc71', letterSpacing: 1 }}>
                     <span style={{ marginRight: 8 }}>🧑‍💻</span>Open Agent Platform
                 </div>
                 <nav style={{ width: '100%' }}>
                     {sidebarItems.map(item => (
-                        <div key={item.label} style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '0.8rem 2rem',
-                            cursor: 'pointer',
-                            fontWeight: 500,
-                            color: '#333',
-                            fontSize: 16,
-                            transition: 'background 0.2s',
-                        }}>
+                        <div
+                            key={item.label}
+                            onClick={() => setActiveSidebar(item.label)}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.8rem 2rem',
+                                cursor: 'pointer',
+                                fontWeight: 500,
+                                color: activeSidebar === item.label ? '#2ecc71' : '#333',
+                                fontSize: 16,
+                                background: activeSidebar === item.label ? '#e8f8f5' : 'transparent',
+                                borderLeft: activeSidebar === item.label ? '4px solid #2ecc71' : '4px solid transparent',
+                                transition: 'background 0.2s, color 0.2s, border 0.2s',
+                                borderRadius: 6,
+                                marginBottom: 4
+                            }}
+                        >
                             <span style={{ marginRight: 12 }}>{item.icon}</span>
                             {item.label}
                         </div>
@@ -132,20 +141,46 @@ const ChatPage = () => {
                     </div>
                 </div>
             </aside>
-            {/* Main Chat Area */}
+            {/* Main Area */}
             <main style={{
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                padding: '0',
                 background: 'transparent'
             }}>
+                {/* Top Bar */}
                 <div style={{
                     width: '100%',
                     maxWidth: 700,
-                    margin: '40px auto 0 auto',
+                    margin: '0 auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '1.2rem 2rem 0.5rem 2rem'
+                }}>
+                    <div style={{ fontWeight: 700, fontSize: 20, color: '#2ecc71' }}>Chat</div>
+                    <div style={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: '50%',
+                        background: '#e8f8f5',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontWeight: 700,
+                        color: '#2ecc71',
+                        fontSize: 18
+                    }}>
+                        U
+                    </div>
+                </div>
+                {/* Chat Card */}
+                <div style={{
+                    width: '100%',
+                    maxWidth: 700,
+                    margin: '10px auto 0 auto',
                     background: '#fff',
                     borderRadius: 18,
                     boxShadow: '0 8px 32px rgba(60, 60, 60, 0.10)',
@@ -175,18 +210,40 @@ const ChatPage = () => {
                             <div
                                 key={idx}
                                 style={{
-                                    alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-                                    background: msg.sender === 'user' ? '#e8f8f5' : '#f4f4f4',
-                                    color: '#333',
-                                    borderRadius: 12,
-                                    padding: '0.7rem 1.2rem',
-                                    maxWidth: '70%',
-                                    boxShadow: msg.sender === 'user'
-                                        ? '0 2px 8px rgba(46,204,113,0.08)'
-                                        : '0 2px 8px rgba(60,60,60,0.06)'
+                                    display: 'flex',
+                                    flexDirection: msg.sender === 'user' ? 'row-reverse' : 'row',
+                                    alignItems: 'flex-end',
+                                    gap: 10
                                 }}
                             >
-                                {msg.text}
+                                <div style={{
+                                    width: 32,
+                                    height: 32,
+                                    borderRadius: '50%',
+                                    background: msg.sender === 'user' ? '#b2f7ef' : '#e8f8f5',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontWeight: 700,
+                                    color: '#2ecc71',
+                                    fontSize: 16
+                                }}>
+                                    {msg.sender === 'user' ? 'U' : 'A'}
+                                </div>
+                                <div
+                                    style={{
+                                        background: msg.sender === 'user' ? '#e8f8f5' : '#f4f4f4',
+                                        color: '#333',
+                                        borderRadius: 12,
+                                        padding: '0.7rem 1.2rem',
+                                        maxWidth: '70%',
+                                        boxShadow: msg.sender === 'user'
+                                            ? '0 2px 8px rgba(46,204,113,0.08)'
+                                            : '0 2px 8px rgba(60,60,60,0.06)'
+                                    }}
+                                >
+                                    {msg.text}
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -197,7 +254,8 @@ const ChatPage = () => {
                             alignItems: 'center',
                             borderTop: '1px solid #f0f0f0',
                             padding: '1rem 2rem',
-                            background: '#fafafa'
+                            background: '#fafafa',
+                            boxShadow: '0 -2px 8px rgba(46,204,113,0.03)'
                         }}
                     >
                         <input
@@ -208,11 +266,13 @@ const ChatPage = () => {
                             style={{
                                 flex: 1,
                                 padding: '0.8rem 1rem',
-                                borderRadius: 8,
-                                border: '1px solid #e0e0e0',
+                                borderRadius: 20,
+                                border: '1.5px solid #e0e0e0',
                                 fontSize: 16,
                                 marginRight: 12,
-                                outline: 'none'
+                                outline: 'none',
+                                background: '#fff',
+                                boxShadow: '0 2px 8px rgba(46,204,113,0.04)'
                             }}
                         />
                         <button
@@ -221,7 +281,7 @@ const ChatPage = () => {
                                 background: 'linear-gradient(90deg, #2ecc71 0%, #b2f7ef 100%)',
                                 color: '#fff',
                                 border: 'none',
-                                borderRadius: 8,
+                                borderRadius: 20,
                                 padding: '0.7rem 2.2rem',
                                 fontSize: 16,
                                 fontWeight: 700,
