@@ -20,7 +20,7 @@ const LoginPage = () => {
         if (error) {
             setError(error.message);
         } else {
-            history.push('/chat'); // Redirect to chat page on successful login
+            history.push('/');
         }
     };
 

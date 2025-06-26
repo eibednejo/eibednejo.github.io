@@ -15,7 +15,6 @@ const ChatPage = () => {
             await uploadFile(file);
         }
     };
-
     const handleKnowledgeBaseUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) return;
         const file = event.target.files[0];
@@ -24,7 +23,6 @@ const ChatPage = () => {
             await uploadFile(file);
         }
     };
-
     const handleDbConnection = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDbConnection(event.target.value);
     };
@@ -56,7 +54,6 @@ const ChatPage = () => {
                     <button type="button" onClick={connectToDatabase}>Connect</button>
                 </div>
             </form>
-            {/* Chat interface would be implemented here */}
         </div>
     );
 };
