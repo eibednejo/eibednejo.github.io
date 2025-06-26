@@ -13,7 +13,7 @@ const SubscriptionPage: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="fancy-container">
             <h1>Subscription Plans</h1>
             <ul>
                 {subscriptionPlans.map(plan => (

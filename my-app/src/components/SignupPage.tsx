@@ -27,9 +27,9 @@ const SignupPage = () => {
     };
 
     return (
-        <div>
+        <div className="fancy-container">
             <h2>Sign Up</h2>
-            <form onSubmit={handleSignup}>
+            <form className="fancy-form" onSubmit={handleSignup}>
                 <div>
                     <label>Email:</label>
                     <input
@@ -50,8 +50,8 @@ const SignupPage = () => {
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {success && <p style={{ color: 'green' }}>{success}</p>}
+            {error && <p className="fancy-message error">{error}</p>}
+            {success && <p className="fancy-message success">{success}</p>}
         </div>
     );
 };

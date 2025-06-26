@@ -38,9 +38,9 @@ const UserProfilePage = () => {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div>
+        <div className="fancy-container">
             <h1>User Profile</h1>
-            <form onSubmit={handleUpdateProfile}>
+            <form className="fancy-form" onSubmit={handleUpdateProfile}>
                 <div>
                     <label>Name:</label>
                     <input

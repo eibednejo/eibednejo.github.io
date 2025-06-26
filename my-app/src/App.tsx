@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'; // Changed to HashRouter
+import './App.css';
 import LoginPage from './components/LoginPage';
 import SignupPage from './components/SignupPage';
 import AdminPage from './components/AdminPage';

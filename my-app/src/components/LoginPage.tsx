@@ -25,9 +25,9 @@ const LoginPage = () => {
     };
 
     return (
-        <div>
+        <div className="fancy-container">
             <h2>Login</h2>
-            <form onSubmit={handleLogin}>
+            <form className="fancy-form" onSubmit={handleLogin}>
                 <div>
                     <label>Email:</label>
                     <input
@@ -46,7 +46,7 @@ const LoginPage = () => {
                         required
                     />
                 </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p className="fancy-message error">{error}</p>}
                 <button type="submit">Login</button>
             </form>
         </div>

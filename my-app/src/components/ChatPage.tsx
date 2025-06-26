@@ -34,26 +34,28 @@ const ChatPage = () => {
     };
 
     return (
-        <div>
+        <div className="fancy-container">
             <h1>Chat Interface</h1>
-            <div>
-                <h2>Upload CSV File</h2>
-                <input type="file" accept=".csv" onChange={handleCsvUpload} />
-            </div>
-            <div>
-                <h2>Upload Knowledge Base File</h2>
-                <input type="file" accept=".txt,.pdf" onChange={handleKnowledgeBaseUpload} />
-            </div>
-            <div>
-                <h2>Database Connection</h2>
-                <input
-                    type="text"
-                    value={dbConnection}
-                    onChange={handleDbConnection}
-                    placeholder="Enter database connection string"
-                />
-                <button onClick={connectToDatabase}>Connect</button>
-            </div>
+            <form className="fancy-form">
+                <div>
+                    <h2>Upload CSV File</h2>
+                    <input type="file" accept=".csv" onChange={handleCsvUpload} />
+                </div>
+                <div>
+                    <h2>Upload Knowledge Base File</h2>
+                    <input type="file" accept=".txt,.pdf" onChange={handleKnowledgeBaseUpload} />
+                </div>
+                <div>
+                    <h2>Database Connection</h2>
+                    <input
+                        type="text"
+                        value={dbConnection}
+                        onChange={handleDbConnection}
+                        placeholder="Enter database connection string"
+                    />
+                    <button type="button" onClick={connectToDatabase}>Connect</button>
+                </div>
+            </form>
             {/* Chat interface would be implemented here */}
         </div>
     );
