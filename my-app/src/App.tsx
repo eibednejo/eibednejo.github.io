@@ -36,6 +36,8 @@ const App = () => {
                 <PrivateRoute path="/admin" component={AdminPage} />
                 <PrivateRoute path="/profile" component={UserProfilePage} />
                 <PrivateRoute path="/subscriptions" component={SubscriptionPage} />
+                {/* Redirect all unknown routes to /login */}
+                <Route render={() => <Redirect to="/login" />} />
             </Switch>
         </Router>
     );
