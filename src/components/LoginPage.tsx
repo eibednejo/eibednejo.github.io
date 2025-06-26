@@ -20,6 +20,9 @@ const LoginPage = () => {
         if (error) {
             setError(error.message);
         } else {
+            if (user && user.id) {
+                localStorage.setItem('authToken', user.id);
+            }
             history.push('/');
         }
     };

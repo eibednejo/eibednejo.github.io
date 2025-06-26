@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    background: linear-gradient(120deg, #b2f7ef 0%, #6edcc4 100%);
     min-height: 100vh;
     margin: 0;
 }
@@ -21,7 +21,7 @@ body {
 .fancy-container h2 {
     font-weight: 700;
     margin-bottom: 1.5rem;
-    color: #f76b1c;
+    color: #2ecc71;
 }
 
 .fancy-form label {
@@ -47,12 +47,12 @@ body {
 }
 
 .fancy-form input:focus {
-    border: 1.5px solid #f76b1c;
+    border: 1.5px solid #2ecc71;
     outline: none;
 }
 
 .fancy-form button {
-    background: linear-gradient(90deg, #f76b1c 0%, #fad961 100%);
+    background: linear-gradient(90deg, #2ecc71 0%, #b2f7ef 100%);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -61,12 +61,12 @@ body {
     font-weight: 700;
     cursor: pointer;
     margin-top: 0.5rem;
-    box-shadow: 0 2px 8px rgba(247, 107, 28, 0.08);
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.08);
     transition: background 0.2s;
 }
 
 .fancy-form button:hover {
-    background: linear-gradient(90deg, #fad961 0%, #f76b1c 100%);
+    background: linear-gradient(90deg, #b2f7ef 0%, #2ecc71 100%);
 }
 
 .fancy-message {
