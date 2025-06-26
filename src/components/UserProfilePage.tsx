@@ -10,7 +10,7 @@ const UserProfilePage = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const user = supabase.auth.user();
+            const user = supabase.auth.user(); // Use .user() for v1
             if (!user) {
                 setError('No user found');
             } else {
@@ -23,9 +23,10 @@ const UserProfilePage = () => {
 
         fetchUser();
     }, []);
+
     const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const { error } = await supabase.auth.update({ data: { name } });
+        const { error } = await supabase.auth.update({ data: { name } }); // Use .update for v1
         if (error) {
             setError(error.message);
         } else {

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabase/client';
-import { useHistory } from 'react-router-dom';
 
-const LoginPage = () => {
+const SignupPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
-    const history = useHistory();
+    const [success, setSuccess] = useState<string | null>(null);
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(null);
+        setSuccess(null);
 
-        const { user, error } = await supabase.auth.signIn({
+        const { user, error } = await supabase.auth.signUp({
             email,
             password,
         });
@@ -20,14 +20,16 @@ const LoginPage = () => {
         if (error) {
             setError(error.message);
         } else {
-            history.push('/'); // Redirect to root (ChatPage)
+            setSuccess('Signup successful! Please check your email for confirmation.');
+            setEmail('');
+            setPassword('');
         }
     };
 
     return (
         <div className="fancy-container">
-            <h2>Login</h2>
-            <form className="fancy-form" onSubmit={handleLogin}>
+            <h2>Sign Up</h2>
+            <form className="fancy-form" onSubmit={handleSignup}>
                 <div>
                     <label>Email:</label>
                     <input
@@ -46,11 +48,12 @@ const LoginPage = () => {
                         required
                     />
                 </div>
-                {error && <p className="fancy-message error">{error}</p>}
-                <button type="submit">Login</button>
+                <button type="submit">Sign Up</button>
             </form>
+            {error && <p className="fancy-message error">{error}</p>}
+            {success && <p className="fancy-message success">{success}</p>}
         </div>
     );
 };
 
-export default LoginPage;
+export default SignupPage;

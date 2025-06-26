@@ -14,13 +14,11 @@ const SubscriptionPage: React.FC = () => {
 
     return (
         <div className="fancy-container">
-            <h1>Subscription Management</h1>
-            <p>Manage your subscription plan, payment methods, and billing history here.</p>
-            <h2>Subscription Plans</h2>
+            <h1>Subscription Plans</h1>
             <ul>
                 {subscriptionPlans.map(plan => (
                     <li key={plan.id}>
-                        <h3>{plan.name}</h3>
+                        <h2>{plan.name}</h2>
                         <p>{plan.price}</p>
                         <button onClick={() => handleSubscriptionSelect(plan.id)}>Select</button>
                     </li>
