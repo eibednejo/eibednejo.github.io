@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabase/client';
 
 const UserProfilePage = () => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
     useEffect(() => {
         const fetchUser = async () => {
-            const { data, error } = await supabase.auth.getUser();
-            if (error) {
-                setError(error.message);
+            const user = supabase.auth.user(); // Use .user() for v1
+            if (!user) {
+                setError('No user found');
             } else {
-                setUser(data.user);
-                setName(data.user?.user_metadata?.name || '');
-                setEmail(data.user?.email || '');
+                setUser(user);
+                setName(user.user_metadata?.name || '');
+                setEmail(user.email || '');
             }
             setLoading(false);
         };
@@ -24,11 +24,9 @@ const UserProfilePage = () => {
         fetchUser();
     }, []);
 
-    const handleUpdateProfile = async (e) => {
+    const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const { error } = await supabase.auth.updateUser({
-            data: { name }
-        });
+        const { error } = await supabase.auth.update({ data: { name } }); // Use .update for v1
         if (error) {
             setError(error.message);
         } else {

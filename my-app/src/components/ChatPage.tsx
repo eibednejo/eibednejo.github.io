@@ -3,27 +3,29 @@ import { supabase } from '../supabase/client';
 import { uploadFile } from '../utils/db';
 
 const ChatPage = () => {
-    const [csvFile, setCsvFile] = useState(null);
-    const [knowledgeBaseFile, setKnowledgeBaseFile] = useState(null);
+    const [csvFile, setCsvFile] = useState<File | null>(null);
+    const [knowledgeBaseFile, setKnowledgeBaseFile] = useState<File | null>(null);
     const [dbConnection, setDbConnection] = useState('');
 
-    const handleCsvUpload = async (event) => {
+    const handleCsvUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files) return;
         const file = event.target.files[0];
         if (file) {
             setCsvFile(file);
-            await uploadFile(file, 'csv');
+            await uploadFile(file);
         }
     };
 
-    const handleKnowledgeBaseUpload = async (event) => {
+    const handleKnowledgeBaseUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files) return;
         const file = event.target.files[0];
         if (file) {
             setKnowledgeBaseFile(file);
-            await uploadFile(file, 'knowledgeBase');
+            await uploadFile(file);
         }
     };
 
-    const handleDbConnection = (event) => {
+    const handleDbConnection = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDbConnection(event.target.value);
     };
 

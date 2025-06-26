@@ -4,10 +4,10 @@ import { supabase } from '../supabase/client';
 const SignupPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
-    const handleSignup = async (e) => {
+    const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(null);
         setSuccess(null);
