@@ -34,7 +34,7 @@ const DebugRoute = () => {
 const App = () => {
     return (
         <Router>
-            <DebugRoute />
+            {/* <DebugRoute /> */}
             <Switch>
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
@@ -42,7 +42,7 @@ const App = () => {
                 <PrivateRoute path="/admin" component={AdminPage} />
                 <PrivateRoute path="/profile" component={UserProfilePage} />
                 <PrivateRoute path="/subscriptions" component={SubscriptionPage} />
-                {/* Redirect all unknown routes to /login */}
+                {/* Catch-all: redirect to login */}
                 <Route render={() => <Redirect to="/login" />} />
             </Switch>
         </Router>
